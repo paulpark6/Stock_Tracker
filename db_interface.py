@@ -6,17 +6,18 @@ columns = ["ID", "Item Name", "Buy Price", "Sell Price" ,"Quantity"]
 def write_to_database(item_name, buy_price, sell_price , quantity):
     existing_data = read_from_database()
 
-    # place to store workbook after edits
-    wb = xlsxwriter.Workbook('./DataBase/transactions.xlsx')
+    # place to store workbook after edits 
+    wb = xlsxwriter.Workbook("./DataBase/transactions.xlsx")
     ws = wb.add_worksheet()
 
 
     # write existing data
     len_row = len(existing_data)
     len_col = len(existing_data[0])
-    for row in range(len_row):
-        for col in range(len_col):
-            ws.write(row, col, existing_data[row][col])
+    if len(existing_data) != 0:
+        for row in range(len_row):
+            for col in range(len_col):
+                ws.write(row, col, existing_data[row][col])
 
     # write headers
     n = len(columns)
@@ -24,6 +25,8 @@ def write_to_database(item_name, buy_price, sell_price , quantity):
         ws.write(0,col,columns[col])
 
     # write new data
+    if len_row == 0:
+        len_row = 1
     # writing id first
     ws.write(len_row, 0, len_row)
     # writing item name
@@ -40,7 +43,7 @@ def write_to_database(item_name, buy_price, sell_price , quantity):
 
 def read_from_database():
     # work book from excel, open it at the addresss
-    wb = xlrd.open_workbook('./DataBase/transactions.xlsx')
+    wb = xlrd.open_workbook("./DataBase/transactions.xlsx")
     # choose which sheet to read from from the work book
     ws = wb.sheet_by_index(0) # 0 is going to be first sheet, 1 is second sheet ... and so on
 
