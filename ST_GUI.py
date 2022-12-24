@@ -1,10 +1,11 @@
 import tkinter as TK
+import db_interface
 
-class MainWindow():
+class MainWindow(): # blueprint for the gui
     def __init__(self, master):
         self.master = master
         # size for gui
-        self.master.geometry("400x700")
+        self.master.geometry("200x280")
 
         # make title for the GUI
         #                     name of gui, title
@@ -46,10 +47,17 @@ class MainWindow():
 
 
         # button
-        self.btn_submit = TK.Button(master, text = "Submit")
+        self.btn_submit = TK.Button(master, text = "Submit", command = self.submit_to_db)
         self.btn_submit.place(x=10,y=230)
+
+    def submit_to_db(self):
+        item_name = self.txt_item_name1.get()
+        buy_price = int(self.txt_item_name2.get())
+        sell_price = int(self.txt_item_name3.get())
+        quantity = int(self.txt_item_name4.get())
+        db_interface.write_to_database(item_name, buy_price, sell_price, quantity)
 # launchin GUI
-root = TK.Tk()
+root = TK.Tk() # this is master
 my_gui = MainWindow(root)
 # kick off the GUI makes it appear on screen
 root.mainloop()
