@@ -8,3 +8,8 @@
 
 this video helped me install neccessary libraries on Virtual Python Server (VENV)
 https://www.youtube.com/watch?v=x-BtaZDbQeo&ab_channel=TechieDude
+
+
+
+https://www.youtube.com/watch?v=fvcqgCuBi-c&ab_channel=KyleWilsonCode
+
