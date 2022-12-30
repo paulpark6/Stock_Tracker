@@ -1,4 +1,5 @@
 import tkinter as TK
+from tkinter import *
 import db_interface
 
 class MainWindow(): # blueprint for the gui
@@ -13,13 +14,20 @@ class MainWindow(): # blueprint for the gui
         # placing the title above at (x,y) coordinates
         self.lbl_title.place(x=10,y=10)
         
-        # adding new label
+        # Item names tab
         self.lbl_item_name1 = TK.Label(master, text="Item Name")
         self.lbl_item_name1.place(x=10,y=50)
-
-        # PUTTING TEXT FIELD
-        self.txt_item_name1 = TK.Entry(master)
-        self.txt_item_name1.place(x=10,y=70)
+        # drop down menu for item name
+        items = ["item1", "item2", "item3", "item4", "item5", "item6", "item7"]
+        self.drop_item_name1 = StringVar()
+        self.drop_item_name1.set("Select Item!")
+        # dropdown
+        options = OptionMenu(master, self.drop_item_name1, *items)
+        options.pack()
+        #self.item1=None
+        #def set():
+        #    item1=drop_item_name1.get()
+        #button_drop = Button(root, command=set, text="Click to Confirm").pack()
         
         # adding new label
         self.lbl_item_name2 = TK.Label(master, text="Buy Price")
@@ -51,7 +59,10 @@ class MainWindow(): # blueprint for the gui
         self.btn_submit.place(x=10,y=230)
 
     def submit_to_db(self):
-        item_name = self.txt_item_name1.get()
+        item_name = self.drop_item_name1.get()
+        # gives error when item is not selected
+        #if item_name == "Select Item!":
+        #    return -1
         buy_price = int(self.txt_item_name2.get())
         sell_price = int(self.txt_item_name3.get())
         quantity = int(self.txt_item_name4.get())
